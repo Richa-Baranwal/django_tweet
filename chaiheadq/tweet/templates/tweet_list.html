@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    Chai aur Tweet
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Welcome to Chai aur Tweet</h1>
+    
+<a class="btn btn-primary"  href="{% url 'tweet_create' %}">Create a new tweet</a>
+<div class="container row gap-3">
+    {% for tweet in tweets %}
+        <div class="card" style="width: 18rem;">
+            {% if tweet.photo %}
+                <img src="{{ tweet.photo.url }}" class="card-img-top" alt="{{ tweet.user.username }}">
+            {% else %}
+                <img src="{% static 'images/placeholder.png' %}" class="card-img-top" alt="No photo">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{tweet.user.username}}</h5>
+                <p class="card-text">{{tweet.text}}</p>
+                {% if tweet.user == request.user %}
+                    <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

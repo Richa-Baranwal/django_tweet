@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    Chai aur Tweet
+{% endblock %}
+
+{% block content %}
+       
+    {% if tweets %}
+
+        {% if searched %}
+
+            <h1 class="text-center">You Searched for {{ searched }}</h1>
+
+            <h2>Search Results:</h2>
+            <br/>
+            <ul class="list-group">
+                {% for tweet in tweets %}
+                    {% comment %} <a href="{% url 'tweet_detail' tweet.id %}"><li class="list-group-item">
+                        <h5>{{ tweet.user.username }} says:</h5>
+                        <p>{{ tweet.text }}</p>
+                        <small class="text-muted">Posted on {{ tweet.created_at }}</small>
+                    </li></a> {% endcomment %}
+
+                    <a href="{% url 'tweet_detail' tweet.id %}">{{ tweet.text }}</a>
+
+                {% endfor %}
+            </ul>
+
+        {% else %}
+            <h1 class="text-center">You forgot to search for anything</h1>
+        {% endif %}
+    {% endif %}
+{% endblock %}

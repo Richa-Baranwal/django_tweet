@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}Chai Detail Page{% endblock %}
+
+{% block content %}
+    <h1>{{ chai.name }} Details</h1>
+
+    <div class="grid grid-cols-1 gap-4 m-4">
+        <div class="bg-amber-400 p-5 rounded-lg text-center shadow-lg hover:scale-105 transition-transform duration-300">
+            <img class = "rounded mx-auto mb-2 object-cover" src="{{ chai.image.url }}" alt="{{ chai.name }}"/>
+            <h3 class="text-lg font-semibold">{{ chai.name }}</h3>
+            <p class="mt-2">Description: {{ chai.description }}</p>
+        </div>
+    </div>
+
+{% endblock %}
